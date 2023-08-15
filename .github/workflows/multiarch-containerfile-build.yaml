@@ -21,6 +21,11 @@ on:
         description: A registry to push image to
         required: false
         type: string
+      organization:
+        default: openshift-knative
+        description: A registry org to push image to
+        required: false
+        type: string      
 
 defaults:
   run:
@@ -64,6 +69,6 @@ jobs:
         with:
           image: ${{ steps.build-image.outputs.image }}
           tags: ${{ steps.build-image.outputs.tags }}
-          registry: ${{ inputs.registry }}/${{ github.repository }}
+          registry: ${{ inputs.registry }}/${{ inputs.repository }}
           username: ${{ secrets.QUAY_USER }}
           password: ${{ secrets.QUAY_PASSWORD }}
